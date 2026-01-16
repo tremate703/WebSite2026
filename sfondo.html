@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sfondi Tech Test | Mindustrys</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent: #00c37a;
+      --max: 1120px;
+      --pad: clamp(18px, 3vw, 36px);
+    }
+
+    *{ box-sizing: border-box; }
+    
+    body{
+      margin:0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#070a10;
+      color:#fff;
+      min-height: 300vh;
+      position: relative;
+    }
+
+    /* VERSIONE 3: Ingranaggi Meccanici */
+    .tech-bg{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #0d1419 0%, #000 70%);
+    }
+
+    .gears-container{
+      position: absolute;
+      inset: 0;
+    }
+
+    .gear{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate 10s linear infinite;
+    }
+
+    /* Corpo principale ingranaggio */
+    .gear::before{
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0,195,122,.15) 0%, rgba(0,0,0,.8) 50%),
+        conic-gradient(
+          from 0deg,
+          transparent 0deg,
+          rgba(0,195,122,.1) 30deg,
+          transparent 30deg,
+          transparent 60deg,
+          rgba(0,195,122,.1) 90deg,
+          transparent 90deg,
+          transparent 120deg,
+          rgba(0,195,122,.1) 150deg,
+          transparent 150deg,
+          transparent 180deg,
+          rgba(0,195,122,.1) 210deg,
+          transparent 210deg,
+          transparent 240deg,
+          rgba(0,195,122,.1) 270deg,
+          transparent 270deg,
+          transparent 300deg,
+          rgba(0,195,122,.1) 330deg,
+          transparent 330deg
+        );
+      box-shadow: 
+        0 0 40px rgba(0,195,122,.4),
+        inset 0 0 30px rgba(0,195,122,.2),
+        inset 0 0 60px rgba(0,0,0,.8);
+    }
+
+    /* Denti esterni dell'ingranaggio */
+    .gear::after{
+      content: '';
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      border-radius: 50%;
+      background: 
+        repeating-conic-gradient(
+          from 0deg,
+          var(--accent) 0deg 8deg,
+          transparent 8deg 22.5deg
+        );
+      clip-path: polygon(
+        50% 50%,
+        100% 0%, 100% 5%, 95% 10%, 95% 15%, 100% 20%, 100% 25%, 95% 30%, 95% 35%, 100% 40%, 100% 45%, 95% 50%, 95% 55%, 100% 60%, 100% 65%, 95% 70%, 95% 75%, 100% 80%, 100% 85%, 95% 90%, 95% 95%, 100% 100%,
+        95% 100%, 90% 95%, 85% 95%, 80% 100%, 75% 100%, 70% 95%, 65% 95%, 60% 100%, 55% 100%, 50% 95%, 45% 95%, 40% 100%, 35% 100%, 30% 95%, 25% 95%, 20% 100%, 15% 100%, 10% 95%, 5% 95%, 0% 100%,
+        0% 95%, 5% 90%, 5% 85%, 0% 80%, 0% 75%, 5% 70%, 5% 65%, 0% 60%, 0% 55%, 5% 50%, 5% 45%, 0% 40%, 0% 35%, 5% 30%, 5% 25%, 0% 20%, 0% 15%, 5% 10%, 5% 5%, 0% 0%
+      );
+      mask-image: radial-gradient(circle, transparent 35%, black 40%, black 60%, transparent 65%);
+      opacity: 0.8;
+    }
+
+    /* Centro tecnico dell'ingranaggio */
+    .gear-center{
+      position: absolute;
+      width: 35%;
+      height: 35%;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      background: 
+        radial-gradient(circle at center, rgba(0,195,122,.3) 0%, rgba(0,0,0,.9) 70%);
+      box-shadow: 
+        0 0 20px var(--accent),
+        inset 0 0 20px var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gear-center::before{
+      content: '';
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      border: 2px solid rgba(0,195,122,.6);
+      box-shadow: 0 0 15px var(--accent) inset;
+    }
+
+    /* Linee radiali tecniche */
+    .gear-lines{
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: 
+        repeating-conic-gradient(
+          from 0deg,
+          transparent 0deg,
+          rgba(0,195,122,.3) 0.5deg,
+          transparent 1deg 22.5deg
+        );
+      border-radius: 50%;
+      animation: counterRotate 10s linear infinite;
+    }
+
+    @keyframes counterRotate{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(-360deg); }
+    }
+
+    /* HUD indicators */
+    .gear-hud{
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      pointer-events: none;
+    }
+
+    .hud-ring{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid rgba(0,195,122,.3);
+      border-top-color: var(--accent);
+      border-right-color: transparent;
+      animation: hudScan 3s linear infinite;
+    }
+
+    @keyframes hudScan{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(360deg); }
+    }
+
+    /* Ingranaggio grande */
+    .gear.large{
+      box-shadow: 0 0 60px rgba(0,195,122,.5);
+    }
+
+    /* Ingranaggio medio */
+    .gear.medium{
+      box-shadow: 0 0 40px rgba(0,195,122,.4);
+    }
+
+    /* Ingranaggio piccolo */
+    .gear.small{
+      box-shadow: 0 0 30px rgba(0,195,122,.3);
+    }
+    .gear:nth-child(8){ left: 25%; top: 82%; animation-duration: 13s; animation-direction: reverse; }
+
+    @keyframes rotate{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(360deg); }
+    }
+
+    /* Connessioni tra ingranaggi */
+    .connections{
+      position: absolute;
+      inset: 0;
+    }
+
+    .connection-line{
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(0,195,122,.3) 20%,
+        rgba(0,195,122,.5) 50%,
+        rgba(0,195,122,.3) 80%,
+        transparent 100%);
+      transform-origin: left center;
+      animation: lineGlow 3s ease-in-out infinite;
+    }
+
+    .connection-line:nth-child(1){
+      left: 15%;
+      top: 20%;
+      width: 200px;
+      transform: rotate(10deg);
+      animation-delay: 0s;
+    }
+
+    .connection-line:nth-child(2){
+      left: 40%;
+      top: 30%;
+      width: 250px;
+      transform: rotate(-5deg);
+      animation-delay: 1s;
+    }
+
+    .connection-line:nth-child(3){
+      left: 20%;
+      top: 60%;
+      width: 220px;
+      transform: rotate(8deg);
+      animation-delay: 2s;
+    }
+
+    .connection-line:nth-child(4){
+      left: 50%;
+      top: 70%;
+      width: 200px;
+      transform: rotate(-10deg);
+      animation-delay: 1.5s;
+    }
+
+    @keyframes lineGlow{
+      0%, 100%{ opacity: 0.3; }
+      50%{ opacity: 1; }
+    }
+
+    /* Particelle meccaniche */
+    .mechanical-particles{
+      position: absolute;
+      inset: 0;
+    }
+
+    .mech-particle{
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: orbit 8s linear infinite;
+    }
+
+    .mech-particle:nth-child(1){
+      left: 10%;
+      top: 15%;
+      animation-duration: 10s;
+    }
+
+    .mech-particle:nth-child(2){
+      left: 35%;
+      top: 25%;
+      animation-duration: 7s;
+    }
+
+    .mech-particle:nth-child(3){
+      left: 65%;
+      top: 10%;
+      animation-duration: 12s;
+    }
+
+    .mech-particle:nth-child(4){
+      left: 45%;
+      top: 65%;
+      animation-duration: 9s;
+    }
+
+    @keyframes orbit{
+      from{ transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      to{ transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+    }
+
+    /* Glow ambientale industriale */
+    .industrial-glow{
+      position: absolute;
+      inset: 0;
+    }
+
+    .glow-area{
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,195,122,.08) 0%, transparent 70%);
+      filter: blur(50px);
+      animation: industrialPulse 6s ease-in-out infinite;
+    }
+
+    .glow-area:nth-child(1){ left: 5%; top: 10%; animation-delay: 0s; }
+    .glow-area:nth-child(2){ right: 10%; top: 30%; animation-delay: 2s; }
+    .glow-area:nth-child(3){ left: 40%; bottom: 15%; animation-delay: 4s; }
+
+    @keyframes industrialPulse{
+      0%, 100%{ opacity: 0.3; transform: scale(1); }
+      50%{ opacity: 0.7; transform: scale(1.15); }
+    }
+
+    /* NAVBAR */
+    .nav{
+      position: sticky;
+      top:0;
+      z-index:999;
+      background: rgba(7,10,16,.75);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-wrap{
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      font-weight:700;
+      color:#fff;
+      white-space:nowrap;
+    }
+
+    .brand-logo{
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .nav-links a{
+      color: rgba(255,255,255,.78);
+      text-decoration:none;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.02em;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition: all .12s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.08);
+    }
+
+    .nav-burger{
+      display:none;
+      width:44px;
+      height:38px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      cursor:pointer;
+      padding:0 10px;
+    }
+    
+    .nav-burger span{
+      display:block;
+      height:2px;
+      margin:6px 0;
+      background: rgba(255,255,255,.85);
+    }
+
+    /* Mobile menu */
+    .nav-mobile{
+      width: min(1120px, 100%);
+      margin:0 auto;
+      padding:10px clamp(18px, 3vw, 36px) 16px;
+      display:grid;
+      gap:10px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(7,10,16,.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-mobile[hidden]{
+      display:none;
+    }
+
+    .nav-mobile a{
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+
+    @media (max-width: 980px){
+      .nav-links{ display:none; }
+      .nav-burger{ display:inline-block; }
+    }
+
+    /* Content */
+    .content{
+      position: relative;
+      z-index: 1;
+      padding: 60px var(--pad);
+    }
+
+    .wrap{
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+    }
+
+    .demo-section{
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px 0;
+      padding: 40px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1{
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      margin: 0 0 20px;
+      text-align: center;
+    }
+
+    p{
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.86);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sfondo ingranaggi meccanici -->
+  <div class="tech-bg">
+    <div class="gears-container">
+      <div class="gear large" style="width: 250px; height: 250px; left: 10%; top: 15%; animation-duration: 12s;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring"></div></div>
+      </div>
+      <div class="gear medium" style="width: 180px; height: 180px; left: 70%; top: 10%; animation-duration: 8s; animation-direction: reverse;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 2s;"></div></div>
+      </div>
+      <div class="gear small" style="width: 120px; height: 120px; left: 50%; top: 25%; animation-duration: 15s;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 4s;"></div></div>
+      </div>
+      <div class="gear large" style="width: 280px; height: 280px; left: 25%; top: 50%; animation-duration: 10s; animation-direction: reverse;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 3.5s;"></div></div>
+      </div>
+      <div class="gear medium" style="width: 200px; height: 200px; left: 75%; top: 55%; animation-duration: 14s;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 2.8s;"></div></div>
+      </div>
+      <div class="gear small" style="width: 140px; height: 140px; left: 15%; top: 75%; animation-duration: 9s; animation-direction: reverse;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 3.2s;"></div></div>
+      </div>
+      <div class="gear medium" style="width: 190px; height: 190px; left: 60%; top: 80%; animation-duration: 11s;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 4.5s;"></div></div>
+      </div>
+      <div class="gear large" style="width: 260px; height: 260px; left: 85%; top: 35%; animation-duration: 13s; animation-direction: reverse;">
+        <div class="gear-lines"></div>
+        <div class="gear-center"></div>
+        <div class="gear-hud"><div class="hud-ring" style="animation-duration: 2.5s;"></div></div>
+      </div>
+    </div>
+    <div class="connections">
+      <div class="connection-line"></div>
+      <div class="connection-line"></div>
+      <div class="connection-line"></div>
+      <div class="connection-line"></div>
+    </div>
+    <div class="mechanical-particles">
+      <div class="mech-particle"></div>
+      <div class="mech-particle"></div>
+      <div class="mech-particle"></div>
+      <div class="mech-particle"></div>
+    </div>
+    <div class="industrial-glow">
+      <div class="glow-area"></div>
+      <div class="glow-area"></div>
+      <div class="glow-area"></div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="Mindustrys">
+        <img src="LongLogo.png" alt="Mindustrys" class="brand-logo">
+      </a>
+
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="index.html">Homepage</a>
+        <a href="macchine_speciali.html">Macchine speciali</a>
+        <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+        <a href="progetti_realizzati.html">Progetti realizzati</a>
+        <a href="chi_siamo.html">Chi siamo</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="news.html">News</a>
+      </nav>
+
+      <button class="nav-burger" aria-label="Apri menu" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MENU MOBILE -->
+  <div class="nav-mobile" id="nav-mobile" hidden>
+    <a href="index.html">Homepage</a>
+    <a href="macchine_speciali.html">Macchine speciali</a>
+    <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+    <a href="progetti_realizzati.html">Progetti realizzati</a>
+    <a href="chi_siamo.html">Chi siamo</a>
+    <a href="news.html">News</a>
+    <a href="sfondo.html">Sfondo</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="wrap">
+      <div class="demo-section">
+        <div>
+          <h1>Ingranaggi Meccanici Animati</h1>
+          <p>Ingranaggi industriali che ruotano continuamente in direzioni diverse. Perfetto per un'azienda di macchine CNC e automazione.</p>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div>
+          <h1>Movimento Meccanico</h1>
+          <p>Gli ingranaggi ruotano a velocità diverse, alcuni in senso orario, altri antiorario, creando un effetto industriale dinamico.</p>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div>
+          <h1>Connessioni Luminose</h1>
+          <p>Linee luminose collegano gli ingranaggi simulando trasmissioni meccaniche e flussi di lavoro automatizzati.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle menu mobile
+    (function(){
+      const btn = document.querySelector('.nav-burger');
+      const menu = document.getElementById('nav-mobile');
+      if(!btn || !menu) return;
+
+      function closeMenu(){
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        menu.hidden = isOpen;
+      });
+
+      // chiudi menu quando clicchi un link
+      menu.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if(a) closeMenu();
+      });
+
+      // chiudi menu se ridimensioni a desktop
+      window.addEventListener('resize', () => {
+        if(window.innerWidth > 980) closeMenu();
+      });
+    })();
+
+    // Effetto parallax sullo scroll per gli ingranaggi
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const gears = document.querySelector('.gears-container');
+      const connections = document.querySelector('.connections');
+      const particles = document.querySelector('.mechanical-particles');
+      
+      if(gears) gears.style.transform = `translateY(${scrolled * 0.15}px)`;
+      if(connections) connections.style.transform = `translateY(${scrolled * 0.25}px)`;
+      if(particles) particles.style.transform = `translateY(${scrolled * -0.1}px)`;
+    });
+  </script>
+</body>
+</html>

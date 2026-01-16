@@ -1,0 +1,1810 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mindustrys — Hero Video</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent: #00c37a;
+      --max: 1120px;
+      --pad: clamp(18px, 3vw, 36px);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#070a10;
+      color:#fff;
+      position: relative;
+    }
+
+    /* Sfondo tech parallax */
+    .tech-bg{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #000000 0%, #0a0e14 25%, #0d1419 50%, #0a1510 75%, #001a0d 100%);
+    }
+
+    .tech-grid{
+      position: absolute;
+      inset: 0;
+      height: 400%;
+      background-image:
+        linear-gradient(rgba(0,195,122,.25) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0,195,122,.25) 2px, transparent 2px);
+      background-size: 60px 60px;
+      transform: perspective(500px) rotateX(60deg) scale(2);
+      transform-origin: center bottom;
+      opacity: 0.8;
+    }
+
+    .particles{
+      position: absolute;
+      inset: 0;
+      height: 300%;
+    }
+
+    .particle{
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent), 0 0 60px rgba(0,195,122,.4);
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1){ left: 10%; top: 10%; animation-delay: 0s; }
+    .particle:nth-child(2){ left: 25%; top: 25%; animation-delay: 1.5s; width: 6px; height: 6px; }
+    .particle:nth-child(3){ left: 45%; top: 15%; animation-delay: 3s; }
+    .particle:nth-child(4){ left: 65%; top: 35%; animation-delay: 2s; width: 8px; height: 8px; }
+    .particle:nth-child(5){ left: 80%; top: 20%; animation-delay: 4s; width: 5px; height: 5px; }
+    .particle:nth-child(6){ left: 35%; top: 50%; animation-delay: 2.5s; width: 6px; height: 6px; }
+    .particle:nth-child(7){ left: 55%; top: 60%; animation-delay: 1s; }
+    .particle:nth-child(8){ left: 75%; top: 45%; animation-delay: 3.5s; width: 5px; height: 5px; }
+    .particle:nth-child(9){ left: 15%; top: 70%; animation-delay: 0.5s; width: 4px; height: 4px; }
+    .particle:nth-child(10){ left: 90%; top: 30%; animation-delay: 2.8s; width: 7px; height: 7px; }
+    .particle:nth-child(11){ left: 20%; top: 85%; animation-delay: 1.2s; width: 5px; height: 5px; }
+    .particle:nth-child(12){ left: 50%; top: 75%; animation-delay: 3.8s; width: 6px; height: 6px; }
+    .particle:nth-child(13){ left: 70%; top: 80%; animation-delay: 0.8s; }
+    .particle:nth-child(14){ left: 40%; top: 90%; animation-delay: 2.2s; width: 5px; height: 5px; }
+    .particle:nth-child(15){ left: 85%; top: 65%; animation-delay: 4.5s; width: 4px; height: 4px; }
+
+    @keyframes float{
+      0%, 100%{ transform: translate(0, 0); opacity: 0.6; }
+      50%{ transform: translate(40px, -50px); opacity: 1; }
+    }
+
+    .tech-waves{
+      position: absolute;
+      inset: 0;
+      height: 300%;
+      opacity: 0.4;
+    }
+
+    .wave{
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 30px rgba(0,195,122,.3), inset 0 0 30px rgba(0,195,122,.1);
+      animation: expand 6s infinite ease-out;
+    }
+
+    .wave:nth-child(1){
+      width: 400px;
+      height: 400px;
+      left: 20%;
+      top: 30%;
+      animation-delay: 0s;
+    }
+
+    .wave:nth-child(2){
+      width: 500px;
+      height: 500px;
+      right: 15%;
+      top: 50%;
+      animation-delay: 2s;
+    }
+
+    .wave:nth-child(3){
+      width: 350px;
+      height: 350px;
+      left: 50%;
+      bottom: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes expand{
+      0%{ transform: scale(0.5); opacity: 0.8; }
+      100%{ transform: scale(1.5); opacity: 0; }
+    }
+
+    /* HERO */
+    .hero{
+      position: relative;
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* VIDEO BACKGROUND */
+    .hero video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      z-index:0;
+      /* piccolo boost di contrasto, opzionale */
+      filter: contrast(1.05) saturate(1.02);
+    }
+
+    /* OVERLAY per leggibilità testo */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,.92) 0%,
+          rgba(0,0,0,.65) 40%,
+          rgba(0,0,0,.15) 100%);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .wrap{
+      position: relative;
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: var(--pad);
+      z-index:2;
+    }
+
+    .hero-content{
+      max-width: 720px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+    }
+
+    .kicker .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background: rgba(255,255,255,.75);
+    }
+
+    h1{
+      margin:0;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      line-height:1.02;
+      font-size: clamp(38px, 5vw, 64px);
+    }
+
+    .sub{
+      margin:0;
+      font-weight:500;
+      line-height:1.45;
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: rgba(255,255,255,.86);
+      max-width: 60ch;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      margin-top: 8px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration:none;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn:hover{ transform: translateY(-1px); }
+
+    .btn.primary{
+      background: rgba(255,255,255,.95);
+      color:#0b0f14;
+      border-color: rgba(255,255,255,.65);
+    }
+    .btn.primary:hover{ background: #fff; }
+
+    .btn.secondary{
+      background: rgba(0,0,0,.22);
+      color:#fff;
+    }
+    .btn.secondary:hover{ background: rgba(0,0,0,.30); }
+
+    .trust{
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,.74);
+      display:flex;
+      gap: 10px 18px;
+      flex-wrap:wrap;
+    }
+
+    .trust span{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .trust i{
+      width:10px;
+      height:10px;
+      border-radius:3px;
+      background: rgba(255,255,255,.70);
+      display:inline-block;
+    }
+
+    /* Mobile: overlay un po' più scuro */
+    @media (max-width: 640px){
+      .hero{
+        min-height: 92vh;
+      }
+      .hero::after{
+        background: linear-gradient(180deg,
+          rgba(0,0,0,.82) 0%,
+          rgba(0,0,0,.62) 60%,
+          rgba(0,0,0,.36) 100%);
+      }
+      .hero-content{ gap: 14px; }
+    }
+  </style>
+</head>
+
+
+<script>
+  (function(){
+    const root = document.documentElement;
+
+    function onScroll(){
+      const doc = document.documentElement;
+      const t = Math.min(1, Math.max(0, (window.scrollY || doc.scrollTop) / ((doc.scrollHeight - innerHeight) || 1)));
+      const power = 0.25 + (t * 0.75); // 0.25..1
+      root.style.setProperty('--bgPower', power.toFixed(3));
+    }
+
+    addEventListener('scroll', onScroll, { passive:true });
+    addEventListener('resize', onScroll);
+    onScroll();
+  })();
+</script>
+
+<script>
+  (function(){
+    const btn = document.querySelector('.nav-burger');
+    const menu = document.getElementById('nav-mobile');
+    if(!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.hidden = open;
+    });
+
+    menu.addEventListener('click', e => {
+      if(e.target.closest('a')){
+        btn.setAttribute('aria-expanded','false');
+        menu.hidden = true;
+      }
+    });
+
+    addEventListener('resize', () => {
+      if(innerWidth > 980){
+        btn.setAttribute('aria-expanded','false');
+        menu.hidden = true;
+      }
+    });
+  })();
+</script>
+
+
+
+
+<body>
+<!-- Sfondo tech animato -->
+<div class="tech-bg" aria-hidden="true">
+  <div class="tech-grid"></div>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="tech-waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html" aria-label="Mindustrys">
+      <img src="LongLogo.png" alt="Mindustrys" class="brand-logo">
+    </a>
+
+    <nav class="nav-links" aria-label="Navigazione principale">
+      <a href="index.html" class="active">Homepage</a>
+      <a href="macchine_speciali.html">Macchine speciali</a>
+      <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+      <a href="progetti_realizzati.html">Progetti realizzati</a>
+      <a href="chi_siamo.html">Chi siamo</a>
+      <a href="news.html">News</a>
+      <a href="sfondo.html">Sfondo</a>
+      
+    </nav>
+
+    <div class="nav-cta">
+      
+
+      <button class="nav-burger"
+              aria-label="Apri menu"
+              aria-expanded="false"
+              aria-controls="nav-mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+
+</header>
+
+<!-- MENU MOBILE -->
+<div class="nav-mobile" id="nav-mobile" hidden>
+  <a href="index.html">Homepage</a>
+  <a href="macchine_speciali.html">Macchine speciali</a>
+  <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+  <a href="progetti_realizzati.html">Progetti realizzati</a>
+  <a href="chi_siamo.html">Chi siamo</a>
+  <a href="news.html">News</a>
+  <a href="sfondo.html">Sfondo</a>
+</div>
+
+<style>
+  html{ scroll-behavior:smooth; }
+
+  .nav{
+    position: sticky;
+    top:0;
+    z-index:999;
+    background: rgba(7,10,16,.55);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-wrap{
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 14px clamp(18px, 3vw, 36px);
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    font-weight:700;
+    color:#fff;
+    white-space:nowrap;
+  }
+
+  .brand-logo{
+    height: 42px;
+    width: auto;
+    display: block;
+  }
+
+  .brand-dot{
+    width:10px;
+    height:10px;
+    border-radius:999px;
+    background: var(--accent, #00c37a);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--accent, #00c37a) 55%, transparent);
+  }
+
+  .brand-text{
+    font-size:16px;
+    opacity:.95;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+  .nav-links a{
+    color: rgba(255,255,255,.78);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.02em;
+    padding:8px 10px;
+    border-radius:999px;
+    border:1px solid transparent;
+    transition: all .12s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active{
+    color: rgba(255,255,255,.95);
+    background: rgba(255,255,255,.05);
+    border-color: rgba(255,255,255,.08);
+  }
+
+  .nav-cta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .nav-btn{
+    padding:10px 14px;
+    font-size:13px;
+  }
+
+  /* Burger */
+  .nav-burger{
+    display:none;
+    width:44px;
+    height:38px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.18);
+    cursor:pointer;
+    padding:0 10px;
+  }
+  .nav-burger span{
+    display:block;
+    height:2px;
+    margin:6px 0;
+    background: rgba(255,255,255,.85);
+  }
+
+  /* Mobile menu */
+  .nav-mobile{
+    width: min(1120px, 100%);
+    margin:0 auto;
+    padding:10px clamp(18px, 3vw, 36px) 16px;
+    display:grid;
+    gap:10px;
+    border-top:1px solid rgba(255,255,255,.08);
+    background: rgba(7,10,16,.7);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-mobile[hidden]{
+    display:none;
+  }
+
+  .nav-mobile a{
+    color: rgba(255,255,255,.85);
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+  }
+
+  @media (max-width: 980px){
+    .nav-links{ display:none; }
+    .nav-btn{ display:none; }
+    .nav-burger{ display:inline-block; }
+  }
+</style>
+
+
+<script>
+  // Toggle menu mobile
+  (function(){
+    const btn = document.querySelector('.nav-burger');
+    const menu = document.getElementById('nav-mobile');
+    if(!btn || !menu) return;
+
+    function closeMenu(){
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      menu.hidden = isOpen;
+    });
+
+    // chiudi menu quando clicchi un link
+    menu.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if(a) closeMenu();
+    });
+
+    // chiudi menu se ridimensioni a desktop
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 980) closeMenu();
+    });
+  })();
+</script>
+
+
+
+
+
+  <section class="hero" aria-label="Hero">
+    <!-- Video background -->
+    <video autoplay muted loop playsinline preload="metadata" poster="">
+      <source src="hero.mp4" type="video/mp4">
+      Il tuo browser non supporta il video HTML5.
+    </video>
+
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="kicker"><span class="dot"></span> Macchine speciali • CNC • Custom</div>
+
+        <h1>Macchine speciali CNC<br>progettate su misura</h1>
+
+        <p class="sub">
+          Progettiamo e realizziamo macchinari custom per processi produttivi complessi e non standard,
+          rendendoli semplici da utilizzare.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#contatti">Parlaci del tuo progetto</a>
+          <a class="btn secondary" href="#processo">Descrivici il tuo processo</a>
+        </div>
+
+        <div class="trust">
+          <span><i></i> Progettazione + software interni</span>
+          <span><i></i> Anteprima prima dell’ordine</span>
+          <span><i></i> Consegna con formazione</span>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- BLOCCO 2 — Problema / Posizionamento (con immagini .png) -->
+<section class="block2" id="processo" aria-label="Problema e posizionamento">
+  <div class="wrap">
+    <div class="b2-grid">
+
+      <!-- COLONNA TESTO -->
+      <div class="b2-copy">
+        <div class="kicker"><span class="dot"></span> Quando una macchina standard non basta</div>
+
+        <h2>Partiamo dal tuo processo,<br>non da un modello a catalogo</h2>
+
+        <p class="b2-lead">
+          Le macchine speciali nascono quando il flusso produttivo è complesso, variabile o fuori standard.
+          Il nostro obiettivo è trasformare quella complessità in un macchinario semplice da utilizzare,
+          con software e interfaccia pensati per l’operatore.
+        </p>
+
+        <div class="b2-points">
+          <div class="b2-point">
+            <h3>Processi non standard</h3>
+            <p>Geometrie, materiali o cicli di lavoro che richiedono una soluzione su misura.</p>
+          </div>
+
+          <div class="b2-point">
+            <h3>Automazione e ripetibilità</h3>
+            <p>Ridurre errori, tempi morti e dipendenza dall’esperienza del singolo operatore.</p>
+          </div>
+
+          <div class="b2-point">
+            <h3>Semplicità d’uso</h3>
+            <p>Funzioni complesse rese immediate tramite software dedicato e logiche guidate.</p>
+          </div>
+        </div>
+
+        <div class="b2-actions">
+          <a class="btn primary" href="#contatti">Raccontaci il tuo processo</a>
+          <a class="btn secondary" href="#progetti">Vedi esempi reali</a>
+        </div>
+      </div>
+
+      <!-- COLONNA IMMAGINI -->
+      <div class="b2-visual">
+
+        <!-- Immagine principale -->
+        <div class="b2-image large">
+          <img src="cmp_prog1.png" alt="Macchina speciale CNC su misura">
+          <span class="b2-caption">Macchina speciale progettata su misura per processo non standard</span>
+        </div>
+
+        <!-- Immagini secondarie -->
+        <div class="b2-image-row">
+          <div class="b2-image small">
+            <img src="pallet.png" alt="Processo produttivo complesso">
+            <span class="b2-caption">Processo complesso da automatizzare</span>
+          </div>
+
+          <div class="b2-image small">
+            <img src="interfaccia.png" alt="Software e interfaccia CNC">
+            <span class="b2-caption">Software e interfaccia semplificata per l’operatore</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 2 */
+  .block2{
+    padding: clamp(54px, 7vw, 96px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b2-grid{
+    display:grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items:start;
+  }
+
+  .block2 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(26px, 3.2vw, 40px);
+  }
+
+  .b2-lead{
+    margin-top:14px;
+    font-weight:500;
+    line-height:1.6;
+    font-size: clamp(15px, 1.25vw, 18px);
+    color: rgba(255,255,255,.86);
+    max-width: 70ch;
+  }
+
+  .b2-points{
+    margin-top:22px;
+    display:grid;
+    gap:14px;
+  }
+
+  .b2-point{
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+  }
+
+  .b2-point h3{
+    margin:0;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-weight:700;
+    color: rgba(255,255,255,.90);
+  }
+
+  .b2-point p{
+    margin-top:8px;
+    font-size:14px;
+    color: rgba(255,255,255,.76);
+    line-height:1.5;
+  }
+
+  .b2-actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  /* IMMAGINI */
+  .b2-visual{
+    display:grid;
+    gap:14px;
+  }
+
+  .b2-image{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.02);
+  }
+
+  .b2-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .b2-image.large{
+    height:280px;
+  }
+
+  .b2-image-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+
+  .b2-image.small{
+    height:160px;
+  }
+
+  .b2-caption{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:10px 12px;
+    font-size:12px;
+    line-height: 1.35;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+    color: rgba(255,255,255,.92);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px){
+    .b2-grid{ grid-template-columns:1fr; }
+    .b2-image.large{ height:240px; }
+  }
+</style>
+
+
+
+
+<!-- BLOCCO 3 — Progetti reali -->
+<section class="block3" id="progetti" aria-label="Progetti realizzati">
+  <div class="wrap">
+
+    <!-- Intro blocco -->
+    <div class="b3-intro">
+      <div class="kicker"><span class="dot"></span> Esperienza sul campo</div>
+      <h2>Riprendere le sezioni di progetti realizzati<br></h2>
+      <p class="b3-lead">
+        Ogni progetto nasce da un’esigenza specifica.  
+        Qui trovi alcuni esempi di macchine speciali sviluppate partendo dal processo,
+        non da un prodotto a catalogo.
+      </p>
+    </div>
+
+    <!-- PROGETTO 1 -->
+    <article class="b3-project">
+      <div class="b3-text">
+        <h3>project 1</h3>
+
+        <p>
+          Il cliente aveva la necessità di automatizzare una lavorazione complessa,
+          caratterizzata da geometrie variabili e cicli produttivi non ripetibili
+          con una macchina standard.
+        </p>
+
+        <ul class="b3-list">
+          <li>Problema: processo manuale lento e soggetto a errori</li>
+          <li>Soluzione: macchina CNC su misura con logiche dedicate</li>
+          <li>Risultato: maggiore ripetibilità e semplicità d’uso</li>
+        </ul>
+      </div>
+
+      <div class="b3-images">
+        <img src="case_macchina.jpeg" alt="Macchina speciale CNC realizzata">
+        <img src="case_problema.jpeg" alt="Problema produttivo iniziale">
+        <img src="case_tecnica.jpeg" alt="Dettaglio tecnico e software">
+      </div>
+    </article>
+
+    <!-- PROGETTO 2 -->
+    <article class="b3-project">
+      <div class="b3-text">
+        <h3>project 2</h3>
+
+        <p>
+          Il processo richiedeva più lavorazioni in un unico ciclo,
+          con movimentazioni e controlli non gestibili da soluzioni standard.
+        </p>
+
+        <ul class="b3-list">
+          <li>Problema: più fasi separate e tempi morti elevati</li>
+          <li>Soluzione: integrazione meccanica e software dedicato</li>
+          <li>Risultato: ciclo unico, tempi certi e qualità costante</li>
+        </ul>
+      </div>
+
+      <div class="b3-images">
+        <img src="case_macchina.jpeg" alt="Macchina speciale CNC realizzata">
+        <img src="case_problema.jpeg" alt="Problema produttivo iniziale">
+        <img src="case_tecnica.jpeg" alt="Dettaglio tecnico e software">
+      </div>
+    </article>
+
+    <!-- PROGETTO 3 -->
+    <article class="b3-project">
+      <div class="b3-text">
+        <h3>project 3</h3>
+
+        <p>
+          L’obiettivo era rendere accessibile all’operatore una lavorazione complessa,
+          riducendo al minimo la possibilità di errore e i tempi di apprendimento.
+        </p>
+
+        <ul class="b3-list">
+          <li>Problema: utilizzo complesso e dipendenza dall’operatore</li>
+          <li>Soluzione: software guidato e macchina progettata ad hoc</li>
+          <li>Risultato: utilizzo semplice e formazione ridotta</li>
+        </ul>
+      </div>
+
+      <div class="b3-images">
+        <img src="case_macchina.jpeg" alt="Macchina speciale CNC realizzata">
+        <img src="case_problema.jpeg" alt="Problema produttivo iniziale">
+        <img src="case_tecnica.jpeg" alt="Dettaglio tecnico e software">
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 3 */
+  .block3{
+    padding: clamp(64px, 8vw, 110px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b3-intro{
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+
+  .block3 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(28px, 3.4vw, 44px);
+  }
+
+  .b3-lead{
+    margin-top:14px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: rgba(255,255,255,.86);
+    line-height:1.6;
+  }
+
+  .b3-project{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(22px, 4vw, 48px);
+    padding: 36px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b3-project:first-of-type{
+    border-top:none;
+  }
+
+  .b3-text h3{
+    margin:0;
+    font-size: 20px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+
+  .b3-text p{
+    margin:14px 0;
+    font-size:15px;
+    line-height:1.6;
+    color: rgba(255,255,255,.84);
+  }
+
+  .b3-list{
+    padding-left:18px;
+    margin: 0;
+    font-size:14px;
+    line-height:1.6;
+    color: rgba(255,255,255,.78);
+  }
+
+  .b3-images{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 160px;
+    gap:12px;
+  }
+
+  .b3-images img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.10);
+  }
+
+  .b3-images img:first-child{
+    grid-column: span 2;
+    height:220px;
+  }
+
+  @media (max-width: 900px){
+    .b3-project{
+      grid-template-columns:1fr;
+    }
+    .b3-images img:first-child{
+      height:200px;
+    }
+  }
+</style>
+
+
+<!-- BLOCCO 4 — Metodo Mindustrys -->
+<section class="block4" id="metodo" aria-label="Metodo Mindustrys">
+  <div class="wrap">
+
+    <div class="b4-intro">
+      <div class="kicker"><span class="dot"></span> Metodo Mindustrys</div>
+      <h2>Dal problema alla macchina finita,<br>con un processo chiaro</h2>
+      <p class="b4-lead">
+        Ogni macchina speciale segue un percorso strutturato: ascoltiamo, analizziamo, simuliamo e
+        progettiamo prima di costruire. Così riduciamo rischi, tempi e incomprensioni.
+      </p>
+    </div>
+
+    <div class="b4-grid">
+
+      <!-- Timeline steps -->
+      <ol class="b4-steps">
+        <li class="b4-step">
+          <div class="b4-num">1</div>
+          <div class="b4-body">
+            <h3>Ascolto del problema</h3>
+            <p>Capire obiettivo, vincoli, materiali, pezzi, volumi e risultato atteso.</p>
+          </div>
+        </li>
+
+        <li class="b4-step">
+          <div class="b4-num">2</div>
+          <div class="b4-body">
+            <h3>Analisi componenti e simulazione processo</h3>
+            <p>Studiamo il ciclo di lavoro e valutiamo la fattibilità con simulazioni e prove tecniche.</p>
+          </div>
+        </li>
+
+        <li class="b4-step">
+          <div class="b4-num">3</div>
+          <div class="b4-body">
+            <h3>Proposta soluzione e costi indicativi</h3>
+            <p>Definiamo l’impostazione della macchina e forniamo una stima per allineare aspettative e budget.</p>
+          </div>
+        </li>
+
+        <li class="b4-step">
+          <div class="b4-num">4</div>
+          <div class="b4-body">
+            <h3>Progettazione tecnica e render</h3>
+            <p>Disegni, layout, cinematica e anteprima visiva della soluzione prima della costruzione.</p>
+          </div>
+        </li>
+
+        <li class="b4-step">
+          <div class="b4-num">5</div>
+          <div class="b4-body">
+            <h3>Conferma e approvazione del cliente</h3>
+            <p>Revisioniamo insieme i dettagli e passiamo alla fase esecutiva solo a specifiche approvate.</p>
+          </div>
+        </li>
+
+        <li class="b4-step">
+          <div class="b4-num">6</div>
+          <div class="b4-body">
+            <h3>Costruzione, consegna e formazione</h3>
+            <p>Assemblaggio, collaudo, installazione e formazione per rendere semplice l’uso della macchina.</p>
+          </div>
+        </li>
+
+        <div class="b4-actions">
+          <a class="btn primary" href="#contatti">Parlaci del tuo progetto</a>
+          <a class="btn secondary" href="#promessa">La nostra promessa</a>
+        </div>
+      </ol>
+
+      <!-- Visual (immagini + nota) -->
+      <div class="b4-visual">
+        <div class="b4-image">
+          <img src="metodo_progettazione.png" alt="Progettazione, simulazione e render">
+          <span class="b4-cap">Progettazione interna: CAD, simulazione, render</span>
+        </div>
+
+        <div class="b4-image">
+          <img src="metodo_officina.png" alt="Costruzione e collaudo in officina">
+          <span class="b4-cap">Costruzione e collaudo: dalla carpenteria all’impianto</span>
+        </div>
+
+        <div class="b4-note">
+          <span class="b4-badge">Obiettivo</span>
+          <p><strong>Ridurre complessità per l’operatore.</strong><br>
+          Software, interfaccia e logiche guidate sono progettati insieme alla meccanica.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 4 */
+  .block4{
+    padding: clamp(64px, 8vw, 110px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b4-intro{
+    max-width: 760px;
+    margin-bottom: 40px;
+  }
+
+  .block4 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(28px, 3.4vw, 44px);
+  }
+
+  .b4-lead{
+    margin-top:14px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: rgba(255,255,255,.86);
+    line-height:1.6;
+  }
+
+  .b4-grid{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items:start;
+  }
+
+  /* Steps timeline */
+  .b4-steps{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:grid;
+    gap:12px;
+  }
+
+  .b4-step{
+    display:grid;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+    position:relative;
+  }
+
+  .b4-num{
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display:grid;
+    place-items:center;
+    font-weight:700;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.92);
+  }
+
+  .b4-body h3{
+    margin:0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing:-0.01em;
+  }
+
+  .b4-body p{
+    margin: 7px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.78);
+  }
+
+  .b4-actions{
+    margin-top: 10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 12px;
+  }
+
+  /* Visual */
+  .b4-visual{
+    display:grid;
+    gap: 14px;
+  }
+
+  .b4-image{
+    position:relative;
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.10);
+    height: 210px;
+    background: rgba(255,255,255,.02);
+  }
+
+  .b4-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .b4-cap{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:10px 12px;
+    font-size:12px;
+    line-height:1.35;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+    color: rgba(255,255,255,.92);
+  }
+
+  .b4-note{
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.22);
+    padding: 16px 18px;
+  }
+
+  .b4-badge{
+    display:inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.84);
+    margin-bottom: 10px;
+  }
+
+  .b4-note p{
+    margin:0;
+    color: rgba(255,255,255,.82);
+    line-height:1.5;
+    font-size: 14px;
+  }
+
+  @media (max-width: 900px){
+    .b4-grid{ grid-template-columns:1fr; }
+    .b4-image{ height: 200px; }
+  }
+</style>
+
+<!-- Anchor blocco successivo -->
+<div id="promessa" style="height:1px"></div>
+
+<!-- BLOCCO 5 — La nostra promessa -->
+<section class="block5" id="promessa" aria-label="La nostra promessa">
+  <div class="wrap">
+
+    <div class="b5-grid">
+      <!-- Testo -->
+      <div class="b5-copy">
+        <div class="kicker"><span class="dot"></span> La nostra promessa</div>
+
+        <h2>Prima l’anteprima.<br>Poi l’ordine.</h2>
+
+        <p class="b5-lead">
+          Siamo specializzati in macchine su misura: per questo vogliamo che tu abbia
+          chiarezza prima di impegnarti. Ti mostriamo la soluzione (layout, render e impostazione tecnica)
+          così puoi valutare concretamente prima di procedere con la costruzione.
+        </p>
+
+        <div class="b5-highlights">
+          <div class="b5-h">
+            <h3>Rischio ridotto</h3>
+            <p>Vedi la direzione del progetto prima di impegnarti sulla costruzione.</p>
+          </div>
+          <div class="b5-h">
+            <h3>Decisioni più rapide</h3>
+            <p>Allineamento su vincoli, obiettivi e budget con una base chiara.</p>
+          </div>
+          <div class="b5-h">
+            <h3>Trasparenza</h3>
+            <p>Niente “scatole chiuse”: sai cosa stai acquistando e perché.</p>
+          </div>
+        </div>
+
+        <div class="b5-actions">
+          <a class="btn primary" href="#contatti">Parlaci del tuo progetto</a>
+          <a class="btn secondary" href="#interno">Tutto interno</a>
+        </div>
+      </div>
+
+      <!-- Card + immagine -->
+      <div class="b5-side">
+        <div class="b5-image">
+          <img src="sollegno1.png" alt="Anteprima: render e impostazione della soluzione">
+          <span class="b5-cap">Anteprima della soluzione: render / layout / simulazione</span>
+        </div>
+
+        <div class="b5-card">
+          <div class="b5-card-title">Come funziona</div>
+
+          <div class="b5-steps">
+            <div class="b5-step">
+              <div class="b5-num">1</div>
+              <div class="b5-sbody">
+                <strong>Raccolta requisiti</strong>
+                <span>Capire obiettivo, vincoli e processo.</span>
+              </div>
+            </div>
+
+            <div class="b5-step">
+              <div class="b5-num">2</div>
+              <div class="b5-sbody">
+                <strong>Anteprima della soluzione</strong>
+                <span>Layout, render e impostazione tecnica.</span>
+              </div>
+            </div>
+
+            <div class="b5-step">
+              <div class="b5-num">3</div>
+              <div class="b5-sbody">
+                <strong>Conferma e avvio costruzione</strong>
+                <span>Solo dopo approvazione si passa alla fase esecutiva.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="b5-note">
+            <strong>In pratica:</strong> ti aiutiamo a decidere con elementi concreti,
+            non con promesse generiche.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 5 */
+  .block5{
+    padding: clamp(64px, 8vw, 110px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b5-grid{
+    display:grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items:start;
+  }
+
+  .block5 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(28px, 3.4vw, 44px);
+  }
+
+  .b5-lead{
+    margin-top:14px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: rgba(255,255,255,.86);
+    line-height:1.6;
+    max-width: 70ch;
+  }
+
+  .b5-highlights{
+    margin-top: 22px;
+    display:grid;
+    gap: 14px;
+  }
+
+  .b5-h{
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+  }
+
+  .b5-h h3{
+    margin:0;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    font-weight:700;
+  }
+
+  .b5-h p{
+    margin: 8px 0 0;
+    font-size:14px;
+    line-height:1.5;
+    color: rgba(255,255,255,.78);
+  }
+
+  .b5-actions{
+    margin-top: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 12px;
+  }
+
+  /* SIDE */
+  .b5-side{
+    display:grid;
+    gap: 14px;
+  }
+
+  .b5-image{
+    position:relative;
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.10);
+    height: 230px;
+    background: rgba(255,255,255,.02);
+  }
+
+  .b5-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .b5-cap{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:10px 12px;
+    font-size:12px;
+    line-height:1.35;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+    color: rgba(255,255,255,.92);
+  }
+
+  .b5-card{
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+    padding: 18px;
+  }
+
+  .b5-card-title{
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: rgba(255,255,255,.92);
+  }
+
+  .b5-steps{
+    display:grid;
+    gap: 12px;
+  }
+
+  .b5-step{
+    display:grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    padding: 12px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.20);
+  }
+
+  .b5-num{
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    display:grid;
+    place-items:center;
+    font-weight:700;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.92);
+  }
+
+  .b5-sbody{
+    display:grid;
+    gap: 3px;
+    line-height: 1.35;
+  }
+
+  .b5-sbody strong{
+    font-size: 14px;
+  }
+
+  .b5-sbody span{
+    font-size: 13px;
+    color: rgba(255,255,255,.78);
+  }
+
+  .b5-note{
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.80);
+  }
+
+  @media (max-width: 900px){
+    .b5-grid{ grid-template-columns: 1fr; }
+    .b5-image{ height: 210px; }
+  }
+</style>
+
+<!-- Anchor blocco successivo -->
+<div id="interno" style="height:1px"></div>
+
+
+<!-- BLOCCO 6 — Tutto interno -->
+<section class="block6" id="interno" aria-label="Tutto interno: controllo totale">
+  <div class="wrap">
+
+    <div class="b6-intro">
+      <div class="kicker"><span class="dot"></span> Tutto interno</div>
+      <h2>Un unico team.<br>Meccanica, impianti e software.</h2>
+      <p class="b6-lead">
+        Progettazione, simulazione, costruzione e software vengono gestiti internamente.
+        Questo ci permette di integrare ogni parte della macchina, ridurre i rimpalli e intervenire rapidamente
+        quando serve ottimizzare il processo.
+      </p>
+    </div>
+
+    <div class="b6-grid">
+
+      <!-- Skills / aree -->
+      <div class="b6-skills">
+        <div class="b6-skill">
+          <h3>Progettazione & simulazione</h3>
+          <p>Layout, cinematica, studi di processo e verifiche tecniche prima della costruzione.</p>
+        </div>
+
+        <div class="b6-skill">
+          <h3>Carpenteria & meccanica</h3>
+          <p>Struttura, assemblaggio, componentistica e integrazione meccanica della soluzione.</p>
+        </div>
+
+        <div class="b6-skill">
+          <h3>Elettrico, pneumatica, oleodinamica</h3>
+          <p>Cablaggi, quadri, sensoristica e impianti integrati in base alle esigenze del ciclo.</p>
+        </div>
+
+        <div class="b6-skill">
+          <h3>Software & interfaccia operatore</h3>
+          <p>Logiche custom e HMI progettata per rendere semplice l’uso di lavorazioni complesse.</p>
+        </div>
+
+        <div class="b6-skill">
+          <h3>Collaudo, consegna e formazione</h3>
+          <p>Test, messa in servizio e formazione per garantire risultati e autonomia operativa.</p>
+        </div>
+      </div>
+
+      <!-- Visual + vantaggi -->
+      <div class="b6-visual">
+        <div class="b6-image">
+          <img src="interno_officina.jpeg" alt="Officina e assemblaggio interno">
+          <span class="b6-cap">Costruzione e collaudo in sede</span>
+        </div>
+
+        <div class="b6-image">
+          <img src="interno_quadro.jpg" alt="Impianti e integrazione: elettrico e pneumatica">
+          <span class="b6-cap">Impianti e integrazione: elettrico / pneumatica / sensoristica</span>
+        </div>
+
+        <div class="b6-box">
+          <div class="b6-box-title">Vantaggi per il cliente</div>
+          <ul class="b6-list">
+            <li>Un solo referente tecnico dall’idea alla consegna</li>
+            <li>Integrazione completa: meccanica + impianti + software</li>
+            <li>Modifiche e ottimizzazioni rapide, senza rimpalli</li>
+            <li>Maggiore coerenza tra progetto e macchina finale</li>
+          </ul>
+        </div>
+
+        <div class="b6-actions">
+          <a class="btn primary" href="#contatti">Parlaci del tuo progetto</a>
+          <a class="btn secondary" href="#contatti">Richiedi una prima valutazione</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 6 */
+  .block6{
+    padding: clamp(64px, 8vw, 110px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b6-intro{
+    max-width: 780px;
+    margin-bottom: 40px;
+  }
+
+  .block6 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(28px, 3.4vw, 44px);
+  }
+
+  .b6-lead{
+    margin-top:14px;
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: rgba(255,255,255,.86);
+    line-height:1.6;
+  }
+
+  .b6-grid{
+    display:grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items:start;
+  }
+
+  /* Skills */
+  .b6-skills{
+    display:grid;
+    gap: 12px;
+  }
+
+  .b6-skill{
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+  }
+
+  .b6-skill h3{
+    margin:0;
+    font-size:14px;
+    letter-spacing:.06em;
+    text-transform: uppercase;
+    font-weight:700;
+    color: rgba(255,255,255,.90);
+  }
+
+  .b6-skill p{
+    margin: 8px 0 0;
+    font-size:14px;
+    line-height:1.5;
+    color: rgba(255,255,255,.78);
+  }
+
+  /* Visual */
+  .b6-visual{
+    display:grid;
+    gap: 14px;
+  }
+
+  .b6-image{
+    position:relative;
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.10);
+    height: 200px;
+    background: rgba(255,255,255,.02);
+  }
+
+  .b6-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .b6-cap{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:10px 12px;
+    font-size:12px;
+    line-height:1.35;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+    color: rgba(255,255,255,.92);
+  }
+
+  .b6-box{
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.22);
+    padding: 18px;
+  }
+
+  .b6-box-title{
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: rgba(255,255,255,.92);
+  }
+
+  .b6-list{
+    margin:0;
+    padding-left:18px;
+    font-size:14px;
+    line-height:1.6;
+    color: rgba(255,255,255,.80);
+  }
+
+  .b6-actions{
+    display:flex;
+    gap: 12px;
+    flex-wrap:wrap;
+  }
+
+  @media (max-width: 900px){
+    .b6-grid{ grid-template-columns:1fr; }
+    .b6-image{ height: 190px; }
+  }
+</style>
+
+<!-- BLOCCO 7 — Clienti -->
+<section class="block7" aria-label="Clienti che ci hanno scelto">
+  <div class="wrap">
+
+    <div class="b7-intro">
+      <div class="kicker"><span class="dot"></span> Clienti</div>
+      <h2>Aziende che hanno scelto<br>le nostre macchine speciali</h2>
+      <p class="b7-lead">
+        Collaboriamo con realtà industriali che operano su processi complessi
+        e richiedono soluzioni affidabili, progettate su misura.
+      </p>
+    </div>
+
+    <div class="b7-logos">
+      <div class="b7-logo"><img src="cliente1.png" alt="Cliente 1"></div>
+      <div class="b7-logo"><img src="cliente2.png" alt="Cliente 2"></div>
+      <div class="b7-logo"><img src="cliente3.png" alt="Cliente 3"></div>
+      <div class="b7-logo"><img src="cliente4.png" alt="Cliente 4"></div>
+      <div class="b7-logo"><img src="cliente5.png" alt="Cliente 5"></div>
+      <div class="b7-logo"><img src="cliente6.png" alt="Cliente 6"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* BLOCCO 7 */
+  .block7{
+    padding: clamp(54px, 7vw, 90px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .b7-intro{
+    max-width: 720px;
+    margin-bottom: 36px;
+  }
+
+  .block7 h2{
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+    font-size: clamp(26px, 3.2vw, 40px);
+  }
+
+  .b7-lead{
+    margin-top:14px;
+    font-size: clamp(14px, 1.2vw, 17px);
+    color: rgba(255,255,255,.80);
+    line-height:1.6;
+  }
+
+  .b7-logos{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(18px, 3vw, 36px);
+    align-items:center;
+  }
+
+  .b7-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+
+  .b7-logo img{
+    max-width: 100%;
+    max-height: 48px;
+    filter: grayscale(100%) brightness(0.9);
+    opacity: 0.85;
+  }
+
+  /* Responsive */
+  @media (max-width: 1000px){
+    .b7-logos{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 500px){
+    .b7-logos{ grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+
+<!-- Anchor blocco successivo -->
+<div id="contatti" style="height:1px"></div>
+
+
+
+  <!-- Segnaposto per ancore (puoi eliminarli nel sito finale) -->
+  <div id="processo" style="height:40vh;background:#0b0f14;"></div>
+  <div id="contatti" style="height:40vh;background:#0b0f14;"></div>
+
+<script>
+  // Effetto parallax sullo scroll per lo sfondo tech
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const grid = document.querySelector('.tech-grid');
+    const particles = document.querySelector('.particles');
+    const waves = document.querySelector('.tech-waves');
+    
+    if(grid) grid.style.transform = `perspective(500px) rotateX(60deg) scale(2) translateY(${scrolled * 0.5}px)`;
+    if(particles) particles.style.transform = `translateY(${scrolled * 0.25}px)`;
+    if(waves) waves.style.transform = `translateY(${scrolled * -0.2}px) rotate(${scrolled * 0.05}deg)`;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Progetti realizzati | Mindustrys</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #00c37a;
+      /* sostituisci col verde reale */
+      --max: 1120px;
+      --pad: clamp(18px, 3vw, 36px);
+      --border: rgba(255, 255, 255, .10);
+      --text: rgba(255, 255, 255, .86);
+      --muted: rgba(255, 255, 255, .74);
+      --bg: #070a10;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      position: relative;
+    }
+
+    /* Sfondo tech parallax */
+    .tech-bg{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #000000 0%, #0a0e14 25%, #0d1419 50%, #0a1510 75%, #001a0d 100%);
+    }
+
+    .tech-grid{
+      position: absolute;
+      inset: 0;
+      height: 400%;
+      background-image:
+        linear-gradient(rgba(0,195,122,.25) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0,195,122,.25) 2px, transparent 2px);
+      background-size: 60px 60px;
+      transform: perspective(500px) rotateX(60deg) scale(2);
+      transform-origin: center bottom;
+      opacity: 0.8;
+    }
+
+    .particles{
+      position: absolute;
+      inset: 0;
+      height: 300%;
+    }
+
+    .particle{
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent), 0 0 60px rgba(0,195,122,.4);
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1){ left: 10%; top: 10%; animation-delay: 0s; }
+    .particle:nth-child(2){ left: 25%; top: 25%; animation-delay: 1.5s; width: 6px; height: 6px; }
+    .particle:nth-child(3){ left: 45%; top: 15%; animation-delay: 3s; }
+    .particle:nth-child(4){ left: 65%; top: 35%; animation-delay: 2s; width: 8px; height: 8px; }
+    .particle:nth-child(5){ left: 80%; top: 20%; animation-delay: 4s; width: 5px; height: 5px; }
+    .particle:nth-child(6){ left: 35%; top: 50%; animation-delay: 2.5s; width: 6px; height: 6px; }
+    .particle:nth-child(7){ left: 55%; top: 60%; animation-delay: 1s; }
+    .particle:nth-child(8){ left: 75%; top: 45%; animation-delay: 3.5s; width: 5px; height: 5px; }
+    .particle:nth-child(9){ left: 15%; top: 70%; animation-delay: 0.5s; width: 4px; height: 4px; }
+    .particle:nth-child(10){ left: 90%; top: 30%; animation-delay: 2.8s; width: 7px; height: 7px; }
+    .particle:nth-child(11){ left: 20%; top: 85%; animation-delay: 1.2s; width: 5px; height: 5px; }
+    .particle:nth-child(12){ left: 50%; top: 75%; animation-delay: 3.8s; width: 6px; height: 6px; }
+    .particle:nth-child(13){ left: 70%; top: 80%; animation-delay: 0.8s; }
+    .particle:nth-child(14){ left: 40%; top: 90%; animation-delay: 2.2s; width: 5px; height: 5px; }
+    .particle:nth-child(15){ left: 85%; top: 65%; animation-delay: 4.5s; width: 4px; height: 4px; }
+
+    @keyframes float{
+      0%, 100%{ transform: translate(0, 0); opacity: 0.6; }
+      50%{ transform: translate(40px, -50px); opacity: 1; }
+    }
+
+    .tech-waves{
+      position: absolute;
+      inset: 0;
+      height: 300%;
+      opacity: 0.4;
+    }
+
+    .wave{
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 30px rgba(0,195,122,.3), inset 0 0 30px rgba(0,195,122,.1);
+      animation: expand 6s infinite ease-out;
+    }
+
+    .wave:nth-child(1){
+      width: 400px;
+      height: 400px;
+      left: 20%;
+      top: 30%;
+      animation-delay: 0s;
+    }
+
+    .wave:nth-child(2){
+      width: 500px;
+      height: 500px;
+      right: 15%;
+      top: 50%;
+      animation-delay: 2s;
+    }
+
+    .wave:nth-child(3){
+      width: 350px;
+      height: 350px;
+      left: 50%;
+      bottom: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes expand{
+      0%{ transform: scale(0.5); opacity: 0.8; }
+      100%{ transform: scale(1.5); opacity: 0; }
+    }
+
+    .wrap {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    section {
+      padding: clamp(54px, 7vw, 96px) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      margin-top: 14px;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.6;
+      font-size: clamp(15px, 1.25vw, 18px);
+      max-width: 78ch;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .25);
+      background: rgba(0, 0, 0, .20);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      transition: transform .12s ease, background .12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      background: rgba(255, 255, 255, .95);
+      color: #0b0f14;
+      border-color: rgba(255, 255, 255, .65);
+    }
+
+    /* NAVBAR (coerente) */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(7, 10, 16, .55);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-wrap {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+
+    .brand-text {
+      font-size: 16px;
+      opacity: .95;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, .78);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all .12s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: rgba(255, 255, 255, .95);
+      background: rgba(255, 255, 255, .05);
+      border-color: rgba(255, 255, 255, .08);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .nav-burger {
+      display: none;
+      width: 44px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(0, 0, 0, .18);
+      cursor: pointer;
+      padding: 0 10px;
+    }
+
+    .nav-burger span {
+      display: block;
+      height: 2px;
+      margin: 6px 0;
+      background: rgba(255, 255, 255, .85);
+    }
+
+    .nav-mobile {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 10px var(--pad) 16px;
+      display: grid;
+      gap: 10px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(7, 10, 16, .70);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-mobile[hidden] {
+      display: none;
+    }
+
+    .nav-mobile a {
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-btn {
+        display: none;
+      }
+
+      .nav-burger {
+        display: inline-block;
+      }
+    }
+
+    /* HERO pagina */
+    .page-hero {
+      padding: clamp(54px, 7vw, 92px) 0;
+    }
+
+    .ph-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(18px, 4vw, 48px);
+      align-items: center;
+    }
+
+    .page-hero h1 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      font-size: clamp(36px, 4.6vw, 60px);
+      margin-top: 10px;
+    }
+
+    .ph-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .img-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .02);
+      height: 260px;
+    }
+
+    .img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.35;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .75) 100%);
+      color: rgba(255, 255, 255, .92);
+    }
+
+    @media (max-width: 900px) {
+      .ph-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .img-card {
+        height: 220px;
+      }
+    }
+
+    /* Filtri (solo UI, non funzionale) */
+    .filters {
+      margin-top: 22px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .03);
+      color: rgba(255, 255, 255, .82);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: default;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Project list */
+    .projects {
+      margin-top: 26px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .03);
+      backdrop-filter: blur(6px);
+    }
+
+    .project h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .project .meta {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: rgba(255, 255, 255, .70);
+      font-size: 12px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .18);
+    }
+
+    .project p {
+      margin-top: 12px;
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 14px;
+      max-width: 70ch;
+    }
+
+    .project ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: rgba(255, 255, 255, .78);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .project-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 140px;
+      gap: 12px;
+    }
+
+    .project-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, .10);
+      display: block;
+      background: linear-gradient(135deg, rgba(255,255,255,.05) 50%, rgba(255,255,255,.09) 100%);
+    }
+
+    .project-images img:first-child {
+      grid-column: span 2;
+      height: 210px;
+    }
+
+    @media (max-width: 980px) {
+      .project {
+        grid-template-columns: 1fr;
+      }
+
+      .project-images img:first-child {
+        height: 190px;
+      }
+    }
+
+    /* CTA finale */
+    .cta {
+      border: none;
+    }
+
+    .cta-box {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(0, 0, 0, .22);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .cta h2 {
+      margin: 0;
+      font-size: clamp(22px, 2.6vw, 34px);
+      line-height: 1.12;
+    }
+
+    .cta p {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, .82);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 900px) {
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    footer {
+      padding: 26px 0 36px;
+      color: rgba(255, 255, 255, .62);
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+<!-- Sfondo tech animato -->
+<div class="tech-bg" aria-hidden="true">
+  <div class="tech-grid"></div>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="tech-waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</div>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="Mindustrys">
+        <img src="LongLogo.png" alt="Mindustrys" class="brand-logo">
+      </a>
+
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="index.html">Homepage</a>
+        <a href="macchine_speciali.html">Macchine speciali</a>
+        <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+        <a href="progetti_realizzati.html" class="active">Progetti realizzati</a>
+        <a href="chi_siamo.html">Chi siamo</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="news.html">News</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button class="nav-burger" aria-label="Apri menu" aria-expanded="false" aria-controls="nav-mobile">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+
+  </header>
+
+  <!-- MENU MOBILE -->
+  <div class="nav-mobile" id="nav-mobile" hidden>
+    <a href="index.html">Homepage</a>
+    <a href="macchine_speciali.html">Macchine speciali</a>
+    <a href="metodo_mindustrys.html">Metodo Mindustrys</a>
+    <a href="progetti_realizzati.html">Progetti realizzati</a>
+    <a href="chi_siamo.html">Chi siamo</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="news.html">News</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="ph-grid">
+        <div>
+          <div class="kicker"><span class="dot"></span> Progetti realizzati</div>
+          <h1>Macchine speciali nate<br>da esigenze reali</h1>
+          <p class="lead">
+            Una selezione di progetti sviluppati su processi non standard.
+            Ogni progetto è raccontato con lo schema: contesto → obiettivo → soluzione → risultato.
+          </p>
+
+          <div class="ph-actions">
+            <a class="btn primary" href="contatti.html">Parlaci del tuo processo</a>
+            <a class="btn" href="metodo_mindustrys.html">Scopri il metodo</a>
+          </div>
+
+          <div class="filters" aria-label="Filtri (placeholder)">
+            <span class="chip">CNC</span>
+            <span class="chip">Automazione</span>
+            <span class="chip">Software custom</span>
+            <span class="chip">Integrazione impianti</span>
+          </div>
+        </div>
+
+        <div class="hero-stack" aria-label="Anteprime progetti (placeholder)">
+          <div class="stack-card card-1">
+            <div class="emoji-content">
+              <span class="emoji">🎯</span>
+              <span class="label">Esigenza</span>
+            </div>
+          </div>
+
+          <div class="stack-card card-2">
+            <div class="emoji-content">
+              <span class="emoji">💡</span>
+              <span class="label">Soluzione</span>
+            </div>
+          </div>
+
+          <div class="stack-card card-3">
+            <div class="emoji-content">
+              <span class="emoji">✅</span>
+              <span class="label">Risultato</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <style>
+    /* HERO: immagini a scaletta (NON sovrapposte) */
+    .hero-stack {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 18px;
+      max-width: 520px;
+      margin-left: auto;
+    }
+
+    /* card base */
+    .stack-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .02);
+      backdrop-filter: blur(6px);
+      box-shadow:
+        0 14px 40px rgba(0, 0, 0, .45),
+        0 0 0 1px rgba(255, 255, 255, .06) inset;
+      transition: transform .18s ease;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* emoji content */
+    .emoji-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 32px;
+    }
+
+    .emoji-content .emoji {
+      font-size: 72px;
+      line-height: 1;
+    }
+
+    .emoji-content .label {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .92);
+    }
+
+    /* scaletta: offset orizzontale */
+    .card-1 {
+      transform: translateX(0px);
+      border-color: color-mix(in srgb, var(--accent) 30%, rgba(255, 255, 255, .12));
+    }
+
+    .card-2 {
+      transform: translateX(28px);
+      opacity: .95;
+    }
+
+    .card-3 {
+      transform: translateX(56px);
+      opacity: .90;
+    }
+
+    /* hover leggero */
+    .hero-stack:hover .card-1 {
+      transform: translateX(-2px);
+    }
+
+    .hero-stack:hover .card-2 {
+      transform: translateX(26px);
+    }
+
+    .hero-stack:hover .card-3 {
+      transform: translateX(54px);
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .hero-stack {
+        max-width: 100%;
+        margin-left: 0;
+      }
+
+      .stack-card {
+        min-height: 140px;
+      }
+
+      .emoji-content .emoji {
+        font-size: 56px;
+      }
+
+      .card-2 {
+        transform: translateX(16px);
+      }
+
+    }
+  </style>
+  
+  <!-- LISTA PROGETTI -->
+<section>
+  <div class="wrap">
+    <div class="kicker"><span class="dot"></span> Esperienze sul campo</div>
+    <h2>Macchine speciali realizzate<br>per reali necessità</h2>
+    <p class="lead">
+      Ogni progetto nasce da un’esigenza specifica. Qui trovi alcuni esempi di macchine speciali sviluppate partendo
+      dal processo, non da un prodotto a catalogo.
+    </p>
+
+    <div class="projects">
+
+      <!-- PROJECT 1 -->
+      <article class="project">
+        <div>
+          <h3>Macchina speciale per lavorazione non standard</h3>
+          <div class="meta">
+            <span class="tag">CNC</span>
+            <span class="tag">Automazione</span>
+            <span class="tag">Oleodinamica</span>
+          </div>
+
+          <p>
+            Progetto nato dalla necessità di automatizzare una lavorazione complessa e renderla semplice da utilizzare,
+            con ciclo ripetibile e controlli dedicati.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> processo manuale / variabilità elevata</li>
+            <li><strong>Obiettivo:</strong> ridurre errori e tempi, aumentare ripetibilità</li>
+            <li><strong>Soluzione:</strong> meccanica + logiche software custom integrate</li>
+            <li><strong>Risultato:</strong> ciclo più stabile, utilizzo più semplice</li>
+          </ul>
+        </div>
+
+        <div class="project-images">
+          <img src="ecobel.jpeg" alt="Progetto 1: macchina">
+          <img src="ecobel5.png" alt="Progetto 1: problema">
+          <img src="ecobel6.png" alt="Progetto 1: dettaglio tecnico/software">
+        </div>
+      </article>
+
+      <!-- PROJECT 2 -->
+      <article class="project">
+        <div>
+          <h3>Sistema CNC custom con integrazioni dedicate</h3>
+          <div class="meta">
+            <span class="tag">Integrazione impianti</span>
+            <span class="tag">Sensoristica</span>
+            <span class="tag">Ciclo unico</span>
+          </div>
+
+          <p>
+            Soluzione progettata per unire più fasi in un unico ciclo e ridurre colli di bottiglia,
+            con controlli specifici e gestione guidata del processo.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> più fasi separate / tempi morti elevati</li>
+            <li><strong>Obiettivo:</strong> ciclo unico e tempi certi</li>
+            <li><strong>Soluzione:</strong> impianti integrati + controllo e logiche dedicate</li>
+            <li><strong>Risultato:</strong> riduzione variabilità e semplificazione operativa</li>
+          </ul>
+        </div>
+
+        <div class="project-images">
+          <img src="rebuli2.jpeg" alt="Progetto 2: macchina">
+          <img src="rebuli1.png" alt="Progetto 2: problema" style="background-color: #f3f3f3d5;">
+          <img src="frontalino_rebuli.png" alt="Progetto 2: dettaglio tecnico/software">
+        </div>
+      </article>
+
+      <!-- PROJECT 3 -->
+      <article class="project">
+        <div>
+          <h3>Automazione su misura con interfaccia semplificata</h3>
+          <div class="meta">
+            <span class="tag">Software custom</span>
+            <span class="tag">Usabilità</span>
+            <span class="tag">Formazione ridotta</span>
+          </div>
+
+          <p>
+            Progetto orientato a rendere accessibile all’operatore una lavorazione complessa,
+            riducendo la dipendenza dall’esperienza del singolo.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> utilizzo complesso / rischio errore</li>
+            <li><strong>Obiettivo:</strong> processo guidato e ripetibile</li>
+            <li><strong>Soluzione:</strong> interfaccia su misura + automazioni dedicate</li>
+            <li><strong>Risultato:</strong> meno errori e tempi di apprendimento ridotti</li>
+          </ul>
+        </div>
+
+        <div class="project-images">
+          <img src="conveco.jpeg" alt="Progetto 3: macchina">
+          <img src="conveco2.png" alt="Progetto 3: problema">
+          <img src="conveco5.jpeg" alt="Progetto 3: dettaglio tecnico/software">
+        </div>
+      </article>
+
+      <!-- PROJECT 4 -->
+      <article class="project">
+        <div>
+          <h3>Stazione automatica di carico/scarico e posizionamento</h3>
+          <div class="meta">
+            <span class="tag">Automazione</span>
+            <span class="tag">Riduzione tempi</span>
+            <span class="tag">Sicurezza</span>
+          </div>
+
+          <p>
+            Soluzione sviluppata per eliminare tempi morti e aumentare la stabilità del ciclo,
+            migliorando ergonomia e sicurezza dell’operatore.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> carico/scarico manuale + variabilità</li>
+            <li><strong>Obiettivo:</strong> ridurre tempi e standardizzare il posizionamento</li>
+            <li><strong>Soluzione:</strong> movimentazione dedicata + sensori e interblocchi</li>
+            <li><strong>Risultato:</strong> ciclo più costante e minor rischio operativo</li>
+          </ul>
+        </div>
+        <div class="project-images">
+          <img src="case_macchina.jpeg" alt="Progetto 3: macchina">
+          <img src="wald1.png" alt="Progetto 3: problema">
+          <img src="case_tecnica.jpeg" alt="Progetto 3: dettaglio tecnico/software">
+        </div>
+      </article>
+
+      <!-- PROJECT 5 -->
+      <article class="project">
+        <div>
+          <h3>Macchina speciale con posizionamento vincolato</h3>
+          <div class="meta">
+            <span class="tag">Controlli</span>
+            <span class="tag">Tracciabilità</span>
+            <span class="tag">Qualità</span>
+          </div>
+
+          <p>
+            Progetto pensato per integrare verifiche e controlli direttamente nel ciclo macchina,
+            riducendo scarti e rilavorazioni.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> controlli esterni / scarti rilevati tardi</li>
+            <li><strong>Obiettivo:</strong> intercettare errori durante il ciclo</li>
+            <li><strong>Soluzione:</strong> sensoristica + logiche di validazione + report</li>
+            <li><strong>Risultato:</strong> qualità più stabile e meno rilavorazioni</li>
+          </ul>
+        </div>
+
+        <div class="project-images">
+          <img src="sollegno4.jpeg" alt="Progetto 5: macchina">
+          <img src="metodo_officina.png" alt="Progetto 5: problema">
+          <img src="sollegno5.jpeg" alt="Progetto 5: dettaglio tecnico/software">
+        </div>
+      </article>
+
+      <!-- PROJECT 6 -->
+      <article class="project">
+        <div>
+          <h3>Macchina speciale per semplificare lavorazioni fuori misura</h3>
+          <div class="meta">
+            <span class="tag">Plastica</span>
+            <span class="tag">Software</span>
+            <span class="tag">Stabilità processo</span>
+          </div>
+
+          <p>
+            Realizzazione di un macchinario dedicato, logiche di ciclo e usabilità,
+            mantenendo l’investimento e aumentando prestazioni e controllo.
+          </p>
+
+          <ul>
+            <li><strong>Contesto:</strong> Lavorazioni fuori misura</li>
+            <li><strong>Obiettivo:</strong> Contenere l'investimento e lavorare in sicurezza</li>
+            <li><strong>Soluzione:</strong> Macchina su misura + ottimizzazione logiche</li>
+            <li><strong>Risultato:</strong> Lavoro in sicurezza e velocità di produzione</li>
+          </ul>
+        </div>
+
+        <div class="project-images">
+          <img src="cmp_reale.jpg" alt="Progetto 6: macchina">
+          <img src="cmp5.png" alt="Progetto 6: problema">
+          <img src="cmp6.png"Progetto 6: dettaglio tecnico/software">
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta-box">
+        <div>
+          <div class="kicker"><span class="dot"></span> Prossimo passo</div>
+          <h2>Hai un processo fuori standard?</h2>
+          <p>
+            Possiamo valutare insieme una soluzione su misura.
+            Raccontaci il pezzo, i vincoli principali e l’obiettivo di produttività/qualità.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn primary" href="contatti.html">Parlaci del tuo progetto</a>
+          <a class="btn" href="macchine_speciali.html">Torna alle macchine speciali</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>© <span id="year"></span> Mindustrys Srl</div>
+        <div style="opacity:.9;">Macchine speciali CNC • Progettazione • Software</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // anno footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle menu mobile navbar
+    (function () {
+      const btn = document.querySelector('.nav-burger');
+      const menu = document.getElementById('nav-mobile');
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        menu.hidden = open;
+      });
+
+      menu.addEventListener('click', e => {
+        if (e.target.closest('a')) {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+        }
+      });
+
+      addEventListener('resize', () => {
+        if (innerWidth > 980) {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+        }
+      });
+    })();
+  </script>
+
+<script>
+  // Effetto parallax sullo scroll per lo sfondo tech
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const grid = document.querySelector('.tech-grid');
+    const particles = document.querySelector('.particles');
+    const waves = document.querySelector('.tech-waves');
+    
+    if(grid) grid.style.transform = `perspective(500px) rotateX(60deg) scale(2) translateY(${scrolled * 0.5}px)`;
+    if(particles) particles.style.transform = `translateY(${scrolled * 0.25}px)`;
+    if(waves) waves.style.transform = `translateY(${scrolled * -0.2}px) rotate(${scrolled * 0.05}deg)`;
+  });
+</script>
+
+</body>
+
+</html>
